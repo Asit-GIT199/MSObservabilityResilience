@@ -10,6 +10,7 @@ namespace Ordering.Application.Contracts.Persistence
 {
 	public interface IAsyncRepository<T> where T : EntityBase
 	{
+		// This is only Abstraction, the implementation is there in the Infrastructure layer
 		Task<IReadOnlyList<T>> GetAllAsync();
 		Task<IReadOnlyList<T>> GetAsync(Expression<Func<T, bool>> predicate);
 		Task<IReadOnlyList<T>> GetAsync(Expression<Func<T, bool>> predicate = null,

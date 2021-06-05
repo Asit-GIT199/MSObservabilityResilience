@@ -6,6 +6,7 @@ namespace Ordering.Application.Contracts.Persistence
 {
     public interface IOrderRepository : IAsyncRepository<Order>
     {
-        Task<IEnumerable<Order>> GetOrderByUserName(string userName);
+        // This is only Abstraction, the implementation is there in the Infrastructure layer
+        Task<IEnumerable<Order>> GetOrdersByUserName(string userName);
     }
 }
