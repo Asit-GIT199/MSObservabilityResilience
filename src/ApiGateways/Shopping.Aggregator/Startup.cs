@@ -27,7 +27,7 @@ namespace Shopping.Aggregator
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddHttpClient<ICatalogService, CatalogService>(c =>
-             c.BaseAddress = new Uri(Configuration["AppSettings:CatalogUrl"]));
+             c.BaseAddress = new Uri(Configuration["ApiSettings:CatalogUrl"]));
 
             services.AddHttpClient<IBasketService, BasketService>(c =>
                 c.BaseAddress = new Uri(Configuration["ApiSettings:BasketUrl"]));
