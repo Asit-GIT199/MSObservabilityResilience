@@ -1,5 +1,6 @@
 ﻿using AspnetRunBasics.Extensions;
 using AspnetRunBasics.Models;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -10,15 +11,22 @@ namespace AspnetRunBasics.Services
     public class CatalogService : ICatalogService
     {
         private readonly HttpClient _client;
+        private readonly ILogger<CatalogService> _logger;
 
-        public CatalogService(HttpClient client)
+        public CatalogService(HttpClient client, ILogger<CatalogService> logger)
         {
             _client = client;
+            _logger = logger;
         }
         public async Task<IEnumerable<CatalogModel>> GetCatalog()
         {
+            //This is the way to write to create and search indexes in the Elasticsearch and Kibana
+            // Here the index names are url and customProperty
+            _logger.LogInformation("Getting Catalog Products from Url : {url} and Custom Property {customProperty}", _client.BaseAddress, 6);
+
             var response = await _client.GetAsync("/Catalog");
             return await response.ReadContentAs<List<CatalogModel>>();
+
         }
 
         public async Task<CatalogModel> GetCatalog(string id)
