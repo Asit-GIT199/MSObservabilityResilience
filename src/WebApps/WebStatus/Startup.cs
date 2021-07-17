@@ -23,6 +23,12 @@ namespace WebStatus
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            //nuget packages 
+            // 1) AspNetCore.HealthChecks.UI
+            // 2) AspNetCore.HealthChecks.UI.InMemory.Storage
+            services.AddHealthChecksUI()
+                 .AddInMemoryStorage();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,9 +50,12 @@ namespace WebStatus
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapHealthChecksUI();
+
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
             });
         }
     }
